@@ -29,7 +29,9 @@ router = APIRouter(
         }
     }
 )
-async def get_shop(account_uuid: str):
+async def get_shop(
+        account_uuid: str
+):
     sql = "SELECT * FROM `Shop` WHERE account_uuid = %s;"
     result = get_all_results(sql, (account_uuid,))
 
