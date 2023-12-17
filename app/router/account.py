@@ -7,9 +7,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 import app.utils.auth as auth
 from app.model.account import CreateAccountForm, UpdateAccountForm, Account, AccountList
 from app.model.auth import Token
-from app.model.general import SuccessModel, ErrorModel
-from app.utils.db_process import execute_query, dict_to_sql_command, dict_delete_none, get_all_results
+from app.model.general import ErrorModel
 from app.router.login import login_for_access_token
+from app.utils.db_process import execute_query, dict_to_sql_command, dict_delete_none, get_all_results
 
 router = APIRouter(
     tags=["account"],
@@ -90,7 +90,6 @@ async def create_account(
 ):
     try:
         form = account_form.model_dump()
-        account_form = account_form.model_dump()
         form["pwd"] = auth.get_password_hash(account_form["pwd"])
         account_id = str(uuid.uuid4())
         sql = """
